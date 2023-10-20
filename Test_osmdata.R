@@ -1,0 +1,5 @@
+library(osmdata)
+bb <- getbb('Belgium')
+q <- opq(bbox = bb)
+belgium <- osmdata_sp(q)
+sp::plot(belgium)
