@@ -5,10 +5,10 @@ library(ggplot2)
 
 
 #chargement des fichiers. /!\ le fichier flandre emet des erreurs avec les quotes encore à résoudre
-wallonie <- read.csv(file = "/home/matias/Documents/1ULB/Cours 2023-2024/Mastic/Mémoire/Jeux_de_données/signaletique-fase_FWB.csv",
+wallonie <- read.csv(file = "Jeux_de_données/signaletique-fase_FWB.csv",
                      header = TRUE,
                      sep = ";")
-flandre <- read.csv(file = "/home/matias/Documents/1ULB/Cours 2023-2024/Mastic/Mémoire/Jeux_de_données/Onderwijs_CSV-Flamand-bx/POI_Onderwijs.csv",
+flandre <- read.csv(file = "Jeux_de_données/Onderwijs_CSV-Flamand-bx/POI_Onderwijs.csv",
                     header = TRUE,
                     sep = ";",
                     quote = "")
@@ -42,16 +42,16 @@ sa_map2_plt
 
 
 
-#code du Voronoi sans la map 
-Voronoi_wallonie <- ggplot(wallonie_sec_distinct, aes(x=Longitude, y=Latitude))+
-  geom_point(data = wallonie_secondaire,
-             aes(x = Longitude, y = Latitude),
-             colour = "red",
-             size = 1)+
-  stat_voronoi(geom = "path")+
-  xlab("Longitude (°E)") + ylab("Latitude (°S)")
-
-Voronoi_wallonie
-
-#Façon de trouver les valeurs NA pour les latitudes/longitudes (ou autre)
-na_rows <- wallonie[is.na(wallonie$Latitude), ]
+# #code du Voronoi sans la map 
+# Voronoi_wallonie <- ggplot(wallonie_sec_distinct, aes(x=Longitude, y=Latitude))+
+#   geom_point(data = wallonie_secondaire,
+#              aes(x = Longitude, y = Latitude),
+#              colour = "red",
+#              size = 1)+
+#   stat_voronoi(geom = "path")+
+#   xlab("Longitude (°E)") + ylab("Latitude (°S)")
+# 
+# Voronoi_wallonie
+# 
+# #Façon de trouver les valeurs NA pour les latitudes/longitudes (ou autre)
+# na_rows <- wallonie[is.na(wallonie$Latitude), ]
