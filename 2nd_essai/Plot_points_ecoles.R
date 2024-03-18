@@ -14,7 +14,6 @@ ecole_flandre
 ############### Transformation du CRS pour correspondre au CRS flamand
 # choisi ça car c'est une projection et c'est mieux pour calculer les distances
 ecole_wallonie_BD72 = st_transform(ecole_wallonie, 31370)
-ecole_wallonie_BD72
 ecole_flandre = st_transform(ecole_flandre, 31370)
 
 ############### Tentative au niveau de la frontière
@@ -77,3 +76,5 @@ mapview(voronoi_complet_dans_Belgique_sf, col.regions = "transparent")+
   mapview(ecole_wallonie_BD72_secondaire, col.regions = "darkgreen")+
   mapview(ecole_flandre_secondaire, col.regions = "red")
  
+
+st_write(voronoi_complet_dans_Belgique_sf, "Jeux_de_données/Homemade/Voronoi_belgique_secondaire.shp")
