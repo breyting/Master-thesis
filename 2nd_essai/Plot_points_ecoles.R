@@ -1,15 +1,37 @@
 library(sf)
 library(mapview)
 
-
 ############### Ajout des jeux de données
 ecole_wallonie = st_read('Jeux_de_données/Signaletique-fase-shapefile/signaletique-fase.shp', quiet = TRUE)
 ecole_flandre = st_read('Jeux_de_données/Onderwijsaanbod_in_Vlaanderen_en_Brussel_via_POI_service/Shapefile/POI_Onderwijs.shp', quiet = TRUE)
 frontiere_Belgique = st_read("Jeux_de_données/Frontière belgique/belgianterritory_4326.shp", quiet = TRUE)
 
+# téléchargement le 22/03/2024
+ecole_flandre_2 = st_read('Jeux_de_données/Onderwijsinstellingen_Shapefile/Onderwijsaanbod_in_Vlaanderen_en_Brussel_via_POI_service/Shapefile/POI_Onderwijs.shp', quiet = TRUE)
+
 ############### Tests pour voir ce qu'il y a dedans
 ecole_wallonie
 ecole_flandre
+
+mapview(ecole_wallonie)
+mapview(ecole_wallonie[ecole_wallonie$niveau == "Fondamental", ])
+mapview(ecole_wallonie[ecole_wallonie$niveau == "Secondaire", ])
+mapview(ecole_wallonie[ecole_wallonie$niveau == "Supérieur", ])
+
+mapview(ecole_flandre)
+mapview(ecole_flandre[ecole_flandre$CATEGORIE == "Basisonderwijs",])
+mapview(ecole_flandre[ecole_flandre$CATEGORIE == "Secundair onderwijs",])
+mapview(ecole_flandre[ecole_flandre$CATEGORIE == "Deeltijds kunstonderwijs",])
+mapview(ecole_flandre[ecole_flandre$CATEGORIE == "Volwassenenonderwijs",])
+mapview(ecole_flandre[ecole_flandre$CATEGORIE == "Hoger onderwijs",])
+
+mapview(ecole_flandre, col.regions = 'red')+
+  mapview(ecole_wallonie)
+
+mapview(ecole_flandre[ecole_flandre$CATEGORIE == "Basisonderwijs",], col.regions = 'red')+
+  mapview(ecole_wallonie[ecole_wallonie$niveau == "Fondamental", ])
+
+
 
 ############### Transformation du CRS pour correspondre au CRS flamand
 # choisi ça car c'est une projection et c'est mieux pour calculer les distances
@@ -23,7 +45,11 @@ frontiere_Belgique_BD72
 
 mapview(frontiere_Belgique_BD72)
 
-############### ecoles secondaire uniquement
+
+
+
+
+############### ecoles secondaire uniquement  ##################################
 ecole_wallonie_BD72_secondaire = ecole_wallonie_BD72[ecole_wallonie_BD72$niveau == "Secondaire", ]
 ecole_flandre_secondaire = ecole_flandre[ecole_flandre$CATEGORIE == "Secundair onderwijs",]
 
